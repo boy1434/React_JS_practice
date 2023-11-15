@@ -11,16 +11,21 @@
         let counter = 0;
         function countUp() {
             counter = counter + 1;
+            render();
+        }
+        function render(){
             ReactDOM.render(<Container/>, root);
         }
-        const Container = () => (
+
+        function Container() {
+            return (
             <div>
-
-                <h3>Total clicks: {counter}</h3>
-                <button onClick={countUp}>Click me</button>
-
-            </div>
-        );
-        ReactDOM.render(<Container/>, root);
+            <h3>Total clicks: {counter}</h3>
+            <button onClick={countUp}>Click me</button>
+            </div>  
+            );
+        }
+        
+        render();
     </script>
  </html>
