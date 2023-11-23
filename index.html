@@ -7,27 +7,34 @@
    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
    <script type="text/babel">
-        function Btn({apple}) {
-            return (<button 
-            style={{
-                backgroundColor: "skyblue",
-                color:"white",
-                padding:"10px 20px",
-                border: 0,
-                borderRadius: 10,
+        function Btn({apple, changeValue}) {
+            console.log(apple, "렌더링 됌");
+            return (
+                <button 
+                onClick={changeValue}
+                style={{
+                    backgroundColor: "skyblue",
+                    color:"white",
+                    padding:"10px 20px",
+                    border: 0,
+                    borderRadius: 10,
             }}
             >
                 {apple}
             </button>
             );
         }
-        
+        const MemorizedBtn = React.memo(Btn);
        function App() {
-        
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => setValue("Revert Changes");
         return (
             <div>
-               <Btn apple="Save Changes"/> 
-               <Btn apple="Continue"/>
+               <MemorizedBtn apple={value} changeValue={changeValue}/> 
+               <MemorizedBtn apple="Continue"/>
+            //    <Btn apple={value} changeValue={changeValue}/> 
+            //    <Btn apple="Continue"/>
+
             </div>  
         );
         } 
